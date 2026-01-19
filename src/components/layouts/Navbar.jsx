@@ -1,18 +1,33 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-const Navbar = () => {
+export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
+  // Check login state from cookie
   useEffect(() => {
-    const hasAuth = document.cookie.includes("auth=true");
-    setIsLoggedIn(hasAuth);
+    const authCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("auth="));
+    setIsLoggedIn(authCookie === "auth=true");
   }, []);
+
+  // Logout function
+  const handleLogout = () => {
+    // Delete the cookie
+    document.cookie = "auth=; Max-Age=0; path=/";
+
+    // Update state immediately
+    setIsLoggedIn(false);
+
+    // Redirect to login page
+    router.push("/login");
+  };
 
   const linkClass = (path) =>
     pathname === path
@@ -20,105 +35,51 @@ const Navbar = () => {
       : "text-gray-600 hover:text-indigo-600 transition";
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b px-6 py-4 flex justify-between items-center">
+      <div className="font-bold text-xl">Gadget-Hunter</div>
 
-          {/* Logo */}
-          <Link href="/" className="text-2xl font-bold">
-          Gadget- 
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
-  Hunter
-</span>
-
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className={linkClass("/")}>
-              Home
-            </Link>
-            <Link href="/products" className={linkClass("/products")}>
-              Products
-            </Link>
-
-            {isLoggedIn && (
-              <Link
-                href="/dashboard/add-product"
-                className={linkClass("/dashboard/add-product")}
-              >
-                Add Product
-              </Link>
-            )}
-
-            {!isLoggedIn ? (
-              <Link
-                href="/login"
-                className="px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition"
-              >
-                Login
-              </Link>
-            ) : (
-              <button
-                onClick={() => {
-                  document.cookie = "auth=; Max-Age=0; path=/";
-                  window.location.href = "/login";
-                }}
-                className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-gray-700"
-          >
-            ☰
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-4 space-y-4">
-          <Link href="/" className="block text-gray-700">
+      <ul className="flex gap-6 items-center">
+        <li>
+          <Link href="/" className={linkClass("/")}>
             Home
           </Link>
-          <Link href="/products" className="block text-gray-700">
+        </li>
+        <li>
+          <Link href="/products" className={linkClass("/products")}>
             Products
           </Link>
+        </li>
 
-          {isLoggedIn && (
-            <Link href="/dashboard/add-product" className="block text-gray-700">
+        {/* Show Add Product only if logged in */}
+        {isLoggedIn && (
+          <li>
+            <Link
+              href="/dashboard/add-product"
+              className={linkClass("/dashboard/add-product")}
+            >
               Add Product
             </Link>
-          )}
+          </li>
+        )}
 
-          {!isLoggedIn ? (
-            <Link
-              href="/login"
-              className="block text-center bg-indigo-600 text-white py-2 rounded-md"
-            >
+        {/* Login / Logout */}
+        {!isLoggedIn ? (
+          <li>
+            <Link href="/login" className={linkClass("/login")}>
               Login
             </Link>
-          ) : (
+          </li>
+        ) : (
+          <li>
             <button
-              onClick={() => {
-                document.cookie = "auth=; Max-Age=0; path=/";
-                window.location.href = "/login";
-              }}
-              className="w-full bg-red-500 text-white py-2 rounded-md"
+              onClick={handleLogout}
+              className="text-gray-600 hover:text-red-500 transition"
             >
               Logout
             </button>
-          )}
-        </div>
-      )}
+          </li>
+        )}
+      </ul>
     </nav>
   );
-};
-
-export default Navbar;
+}

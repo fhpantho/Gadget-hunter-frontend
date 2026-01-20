@@ -1,15 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Orbitron } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
   subsets: ["latin"],
 });
 
@@ -21,16 +21,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${orbitron.variable} antialiased`}>
         <header>
           <Navbar></Navbar>
         </header>
         <main className="py-2 md:w-11/12 mx-auto min-h-[calc(100vh-302px)]">
           {children}
         </main>
-        
 
         <Footer></Footer>
       </body>

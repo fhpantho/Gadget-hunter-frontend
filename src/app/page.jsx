@@ -13,10 +13,17 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`https://gadgethunter.vercel.app/products`);
+        if (!res.ok) throw new Error("Failed to fetch products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProducts();
   }, []);
 
   return (

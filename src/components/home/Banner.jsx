@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,24 +14,21 @@ const slides = [
     title: "Discover the Latest Gadgets",
     description:
       "Explore cutting-edge technology and premium gadgets at the best prices.",
-    image:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
   },
   {
     id: 2,
     title: "Upgrade Your Tech Life",
     description:
       "Smartphones, laptops, wearables, and accessories — all in one place.",
-    image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
   },
   {
     id: 3,
     title: "Hunt the Best Gadgets",
     description:
       "Gadget-Hunter helps you find the perfect tech that matches your lifestyle.",
-    image:
-      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+    image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
   },
 ];
 
@@ -39,44 +37,38 @@ const Banner = () => {
     <section className="w-full">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         navigation
         loop
-        className="h-[80vh]"
+        className="h-[80vh] w-full"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="h-[80vh] bg-cover bg-center relative flex items-center"
+              className="hero h-[80vh]"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/60"></div>
-
-              {/* Content */}
-              <div className="relative z-10 max-w-7xl mx-auto px-6">
-                <h1 className="text-4xl md:text-6xl font-bold text-white max-w-2xl leading-tight">
-                  {slide.title}
-                </h1>
-
-                <p className="mt-4 text-gray-200 max-w-xl text-lg">
-                  {slide.description}
-                </p>
-
-                <div className="mt-8 flex gap-4">
-                  <a
-                    href="/products"
-                    className="px-6 py-3 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition"
-                  >
-                    Explore Products
-                  </a>
-                  <a
-                    href="/login"
-                    className="px-6 py-3 rounded-md border border-white text-white hover:bg-white hover:text-black transition"
-                  >
-                    Login
-                  </a>
+              <div className="hero-overlay bg-opacity-70 bg-gray-900"></div>
+              <div className="hero-content text-center text-neutral-content">
+                <div className="max-w-md">
+                  <h1 className="mb-5 text-5xl font-bold font-display uppercase tracking-wider text-primary">
+                    {slide.title}
+                  </h1>
+                  <p className="mb-5 text-gray-300 text-lg font-light">
+                    {slide.description}
+                  </p>
+                  <div className="flex gap-4 justify-center">
+                    <Link href="/products" className="btn btn-primary">
+                      Explore Products
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="btn btn-outline btn-secondary"
+                    >
+                      Login
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

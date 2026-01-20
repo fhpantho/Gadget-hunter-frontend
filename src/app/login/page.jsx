@@ -13,62 +13,60 @@ export default function LoginPage() {
     e.preventDefault();
 
     // Hardcoded credentials
-    if (
-      email === "admin@gadget-hunter.com" &&
-      password === "123456"
-    ) {
+    if (email === "admin@gadget-hunter.com" && password === "123456") {
       // Set cookie
       document.cookie = "auth=true; path=/; max-age=3600";
 
-      // Redirect to products page
-      router.push("/products");
+      // Redirect to home page
+      router.push("/");
     } else {
       setError("Invalid email or password");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       <form
         onSubmit={handleLogin}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        className="bg-base-100 p-8 rounded-lg shadow-xl w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center mb-6">
+        <h2 className="text-3xl font-bold text-center mb-6 font-display text-primary">
           Login to Gadget-Hunter
         </h2>
 
         {error && (
-          <p className="text-red-500 text-sm mb-4 text-center">
-            {error}
-          </p>
+          <div className="alert alert-error mb-4 text-sm">
+            <span>{error}</span>
+          </div>
         )}
 
-        <div className="mb-4">
-          <label className="block text-sm mb-1">Email</label>
+        <div className="form-control w-full mb-4">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
           <input
             type="email"
             required
-            className="w-full border px-3 py-2 rounded-md"
+            className="input input-bordered w-full"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        <div className="mb-6">
-          <label className="block text-sm mb-1">Password</label>
+        <div className="form-control w-full mb-6">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
           <input
             type="password"
             required
-            className="w-full border px-3 py-2 rounded-md"
+            className="input input-bordered w-full"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
-        >
+        <button type="submit" className="btn btn-primary w-full">
           Login
         </button>
       </form>

@@ -15,17 +15,23 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-base-200">
       <div className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">What Our Customers Say</h2>
+        <h2 className="text-4xl font-bold mb-12 font-display text-primary">
+          What Our Customers Say
+        </h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           {testimonials.map((t, idx) => (
             <div
               key={idx}
-              className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition flex-1"
+              className="card bg-base-100 shadow-xl flex-1 hover:scale-105 transition duration-300"
             >
-              <p className="text-gray-700 mb-4">"{t.text}"</p>
-              <h3 className="font-semibold text-indigo-600">{t.name}</h3>
+              <div className="card-body">
+                <p className="text-base-content/80 italic mb-4">
+                  &quot;{t.text}&quot;
+                </p>
+                <h3 className="font-bold text-secondary text-lg">{t.name}</h3>
+              </div>
             </div>
           ))}
         </div>

@@ -2,28 +2,38 @@ import Link from "next/link";
 
 export default function TopProducts({ products }) {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-base-100">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">Top Products</h2>
+        <h2 className="text-4xl font-bold mb-12 font-display text-primary">
+          Top Products
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products?.slice(0, 4).map((product) => (
             <div
               key={product._id}
-              className="bg-gray-50 p-4 rounded-lg shadow hover:shadow-lg transition"
+              className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-40 w-full object-cover rounded"
-              />
-              <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
-              <p className="text-indigo-600 font-bold mt-2">${product.price}</p>
-              <Link
-                href={`/products/${product._id}`}
-                className="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
-              >
-                View
-              </Link>
+              <figure className="h-48 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
+              </figure>
+              <div className="card-body text-left">
+                <h3 className="card-title text-base">{product.name}</h3>
+                <p className="text-primary font-bold text-lg">
+                  ${product.price}
+                </p>
+                <div className="card-actions justify-end mt-2">
+                  <Link
+                    href={`/products/${product._id}`}
+                    className="btn btn-primary btn-sm"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
             </div>
           ))}
         </div>

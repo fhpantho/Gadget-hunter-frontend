@@ -23,18 +23,22 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-base-200">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">Why Choose Gadget-Hunter?</h2>
+        <h2 className="text-4xl font-bold mb-12 font-display text-primary">
+          Why Choose Gadget-Hunter?
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {features.map((f, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition"
+              className="card bg-base-100 shadow-xl hover:shadow-2xl transition hover:-translate-y-2 duration-300"
             >
-              <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-              <p className="text-gray-600">{f.desc}</p>
+              <div className="card-body items-center text-center">
+                <div className="text-5xl mb-4">{f.icon}</div>
+                <h3 className="card-title text-xl mb-2">{f.title}</h3>
+                <p className="text-base-content/70">{f.desc}</p>
+              </div>
             </div>
           ))}
         </div>

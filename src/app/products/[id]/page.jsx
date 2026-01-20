@@ -13,7 +13,9 @@ export default function ProductDetailsPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/products/${id}`);
+        const res = await fetch(
+          `https://gadgethunter.vercel.app/products/${id}`,
+        );
         if (!res.ok) throw new Error("Product not found");
         const data = await res.json();
         setProduct(data);
@@ -25,24 +27,24 @@ export default function ProductDetailsPage() {
       }
     };
 
-    fetchProduct();
+    if (id) fetchProduct();
   }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <p className="text-gray-500 text-lg">Loading product...</p>
+      <div className="min-h-screen flex justify-center items-center bg-base-100">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        <p className="text-gray-500 text-lg">Product not found.</p>
+      <div className="min-h-screen flex flex-col justify-center items-center bg-base-100">
+        <p className="text-gray-500 text-lg mb-4">Product not found.</p>
         <button
           onClick={() => router.push("/products")}
-          className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+          className="btn btn-primary"
         >
           Back to Products
         </button>
@@ -51,30 +53,33 @@ export default function ProductDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen py-10 px-6 bg-gray-50 flex justify-center">
-      <div className="bg-white rounded-lg shadow-md max-w-4xl w-full flex flex-col md:flex-row overflow-hidden">
-        {/* Image */}
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full md:w-1/2 h-96 object-cover"
-        />
-
-        {/* Product Details */}
-        <div className="p-6 flex flex-col justify-between">
-          <div>
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <p className="text-gray-600 mb-2">{product.category}</p>
-            <p className="text-indigo-600 font-bold text-2xl mb-4">${product.price}</p>
-            <p className="text-gray-700">{product.description}</p>
+    <div className="min-h-screen py-10 px-6 bg-base-100 flex justify-center">
+      <div className="card lg:card-side bg-base-200 shadow-xl max-w-4xl w-full">
+        <figure className="lg:w-1/2">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+        </figure>
+        <div className="card-body lg:w-1/2">
+          <h2 className="card-title text-3xl font-bold font-display">
+            {product.name}
+          </h2>
+          <div className="badge badge-secondary">{product.category}</div>
+          <p className="py-4">{product.description}</p>
+          <div className="flex items-center justify-between mt-auto">
+            <p className="text-2xl font-bold text-primary">${product.price}</p>
+            <div className="card-actions">
+              <button
+                onClick={() => router.push("/products")}
+                className="btn btn-outline"
+              >
+                Back
+              </button>
+              <button className="btn btn-primary">Add to Cart</button>
+            </div>
           </div>
-
-          <button
-            onClick={() => router.push("/products")}
-            className="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
-          >
-            Back to Products
-          </button>
         </div>
       </div>
     </div>

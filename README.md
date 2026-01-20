@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gadget Hunter - Frontend
 
-## Getting Started
+Gadget Hunter is a modern e-commerce web application designed for browsing and managing the latest gadgets. This repository contains the frontend usage, built with Next.js and Tailwind CSS.
 
-First, run the development server:
+## 🚀 Features
+
+- **Modern UI/UX**: Built with [Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/) for a sleek, responsive design.
+- **Product Browsing**: View a list of available gadgets with details.
+- **Product Details**: Dedicated pages for each product with in-depth information.
+- **Dashboard**: Admin-like dashboard for managing products (e.g., Adding new products).
+- **Toast Notifications**: Interactive user feedback using [React Toastify](https://fkhadra.github.io/react-toastify/).
+- **Carousels**: Product showcases using [Swiper](https://swiperjs.com/).
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: Tailwind CSS v4, DaisyUI v5
+- **Icons**: Lucide React
+- **State Management**: React Hooks
+- **Language**: JavaScript
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/                # App Router pages (Home, Products, Dashboard, etc.)
+├── components/         # Reusable UI components (Navbar, Footer, ProductCards, etc.)
+└── utils/              # Utility functions and helpers
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Installation & Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1.  **Clone the repository**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    git clone https://github.com/fhpantho/Gadget-hunter-frontend.git
+    cd gadget-hunter-frontend
+    ```
 
-## Learn More
+2.  **Install dependencies**:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Environment Setup**:
+    Create a `.env.local` file in the root directory and add the following:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```env
+    NEXT_PUBLIC_API_URL=https://gadgethunter.vercel.app
+    # Or for local development
+    # NEXT_PUBLIC_API_URL=http://localhost:5000
+    ```
 
-## Deploy on Vercel
+4.  **Run the development server**:
+
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 📜 Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Starts the production server.
+- `npm run lint`: Runs ESLint to check for code quality issues.
+
+## 🚀 Deployment
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
